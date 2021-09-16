@@ -1,6 +1,7 @@
 #[derive(Debug,PartialEq)]
 pub enum AMError {
     IO(),
+    Int(),
     TODO(u8),
     FS(AMErrorFS),
 }
@@ -14,6 +15,12 @@ impl From<u8> for AMError {
 impl From<std::io::Error> for AMError {
     fn from(_:std::io::Error) -> Self {
         AMError::IO()
+    }
+}
+
+impl From<std::num::TryFromIntError> for AMError {
+    fn from(_:std::num::TryFromIntError) -> Self {
+        AMError::Int()
     }
 }
 
