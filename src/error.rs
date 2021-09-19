@@ -1,7 +1,8 @@
 #[derive(Debug,PartialEq)]
 pub enum AMError {
-    IO(),
-    Int(),
+    IO,
+    Int,
+    Poison,
     TODO(u8),
     FS(AMErrorFS),
 }
@@ -14,13 +15,19 @@ impl From<u8> for AMError {
 
 impl From<std::io::Error> for AMError {
     fn from(_:std::io::Error) -> Self {
-        AMError::IO()
+        AMError::IO
     }
 }
 
 impl From<std::num::TryFromIntError> for AMError {
     fn from(_:std::num::TryFromIntError) -> Self {
-        AMError::Int()
+        AMError::Int
+    }
+}
+
+impl<T> From<std::sync::PoisonError<T>> for AMError {
+    fn from(_:std::sync::PoisonError<T>) -> Self {
+        AMError::Poison
     }
 }
 
