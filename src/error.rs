@@ -40,7 +40,9 @@ impl From<AMErrorFS> for AMError {
 #[derive(Debug,PartialEq)]
 pub enum AMErrorFS {
     NoSuperblock,
+    NoRootgroup,
     Checksum,
     Signature,
     DiskID,
+    NullPointer,
 }
