@@ -5,6 +5,7 @@ pub enum AMError {
     Poison,
     TODO(u8),
     FS(AMErrorFS),
+    Uninit,
 }
 
 impl From<u8> for AMError {
@@ -45,4 +46,5 @@ pub enum AMErrorFS {
     Signature,
     DiskID,
     NullPointer,
+    UnknownDevid,
 }
