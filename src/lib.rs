@@ -1,3 +1,3 @@
-pub type AMResult<T> = Result<T,error::AMError>;
+pub type AMResult<T> = anyhow::Result<T>;
 
 pub mod error;

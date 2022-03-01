@@ -1,4 +1,6 @@
-#[derive(Debug,PartialEq)]
+use std::error::Error;
+
+#[derive(Debug, PartialEq)]
 pub enum AMError {
     IO,
     Int,
@@ -8,27 +10,29 @@ pub enum AMError {
     Uninit,
 }
 
+impl std::fmt::Display for AMError {
+    fn fmt(&self, f: &mut std::fmt::Formatter) -> std::fmt::Result {
+        write!(f, "AMError: {:?}",self) // user-facing output
+    }
+}
+
+impl Error for AMError {}
+
 impl From<u8> for AMError {
-    fn from(_:u8) -> Self {
+    fn from(_: u8) -> Self {
         panic!();
     }
 }
 
 impl From<std::io::Error> for AMError {
-    fn from(_:std::io::Error) -> Self {
+    fn from(_: std::io::Error) -> Self {
         AMError::IO
     }
 }
 
 impl From<std::num::TryFromIntError> for AMError {
-    fn from(_:std::num::TryFromIntError) -> Self {
+    fn from(_: std::num::TryFromIntError) -> Self {
         AMError::Int
-    }
-}
-
-impl<T> From<std::sync::PoisonError<T>> for AMError {
-    fn from(_:std::sync::PoisonError<T>) -> Self {
-        AMError::Poison
     }
 }
 
@@ -38,7 +42,15 @@ impl From<AMErrorFS> for AMError {
     }
 }
 
-#[derive(Debug,PartialEq)]
+impl std::fmt::Display for AMErrorFS {
+    fn fmt(&self, f: &mut std::fmt::Formatter) -> std::fmt::Result {
+        write!(f, "FSError: {:?}",self) // user-facing output
+    }
+}
+
+impl Error for AMErrorFS {}
+
+#[derive(Debug, PartialEq)]
 pub enum AMErrorFS {
     NoSuperblock,
     NoRootgroup,
