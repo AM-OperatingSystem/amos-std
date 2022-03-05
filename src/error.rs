@@ -12,7 +12,7 @@ pub enum AMError {
 
 impl std::fmt::Display for AMError {
     fn fmt(&self, f: &mut std::fmt::Formatter) -> std::fmt::Result {
-        write!(f, "AMError: {:?}",self) // user-facing output
+        write!(f, "AMError: {:?}", self) // user-facing output
     }
 }
 
@@ -44,7 +44,7 @@ impl From<AMErrorFS> for AMError {
 
 impl std::fmt::Display for AMErrorFS {
     fn fmt(&self, f: &mut std::fmt::Formatter) -> std::fmt::Result {
-        write!(f, "FSError: {:?}",self) // user-facing output
+        write!(f, "FSError: {:?}", self) // user-facing output
     }
 }
 
@@ -53,10 +53,14 @@ impl Error for AMErrorFS {}
 #[derive(Debug, PartialEq)]
 pub enum AMErrorFS {
     NoSuperblock,
-    NoRootgroup,
+    NoDiskgroup,
+    NoObject,
+    NoFSGroup,
+    NoAllocator,
     Checksum,
     Signature,
     DiskID,
     NullPointer,
     UnknownDevid,
+    AllocFailed,
 }
