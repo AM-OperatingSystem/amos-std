@@ -61,6 +61,6 @@ pub enum AMErrorFS {
     Signature,
     DiskID,
     NullPointer,
-    UnknownDevid,
+    UnknownDevId,
     AllocFailed,
 }
